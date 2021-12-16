@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import StoryListItem from '../story/StoryListItem';
+import StoryListItem from '../../../components/StoryListItem';
+// import StoryListItem from '../story/StoryListItem';
 import colors from '../../../res/colors';
 import images from '../../../res/images';
 
