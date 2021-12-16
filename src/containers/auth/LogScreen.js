@@ -31,9 +31,12 @@ function LogScreen({ navigation }) {
         setLoading(true)
         result = await result.json();
         console.log("result", result)
+        setLoading(false)
         if (result.status == "OK") {
-            setLoading(false)
             navigation.navigate("MainNavigator")
+        }
+        else {
+            alert("Please fill the Login Details")
         }
     }
 

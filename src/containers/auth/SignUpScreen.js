@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     StyleSheet,
     Image,
+    ActivityIndicator
 } from 'react-native';
 import React, { useState } from 'react';
 import images from 'res/images';
@@ -34,7 +35,12 @@ export default function SignUp({ navigation }) {
         result = await result.json()
         console.log("result", result);
         setLoading(false)
-        navigation.navigate("MainNavigator")
+        if (result.status == "OK") {
+            navigation.navigate("MainNavigator")
+        }
+        else (
+            alert("Please provide correct details")
+        )
     }
 
     if (loading) {
