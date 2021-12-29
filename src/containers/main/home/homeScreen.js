@@ -1,36 +1,31 @@
-import React from 'react';
-import { FlatList, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, View, ActivityIndicator } from 'react-native';
 import Post from '../post/Post'
 import colors from '../../../res/colors';
-// import images from 'res/images';
 import StoryContainer from '../story/StoryContainer';
 
 export default function homeScreen({ navigation }) {
-  const data = [
-    { key: '1' },
-    { key: '2' },
-    { key: '3' },
-    { key: '4' },
-    { key: '5' },
-    { key: '6' },
-    { key: '7' },
-    { key: '8' },
-    { key: '9' },
-    { key: '10' },
-  ];
+  const [Data, setData] = useState([])
+  // console.log("dara", Data);
+
+  const API = 'http://188.166.189.237:3001/api/v1/users/feed';
+  useEffect(() => {
+    async function getData() {
+      const request = fetch(API, {
+        method: "GET",
+        headers: {
+          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MDc1NTI0MywiZXhwIjoxNjQwODQxNjQzfQ.5A-Px60y1mD-T9qmDZsKTa8wIhLnV_JhUH8PENVVe9A',
+        }
+      });
+      const response = await request;
+      const parsed = await response.json();
+      setData(parsed.data);
+    }
+    getData();
+  }, []);
 
   const storyOnPress = () => navigation.navigate('StoryScreen');
 
-  const post = {
-    userName: 'John Doe',
-    placeName: 'Istanbul, Turkey',
-    imgUrl: 'https://picsum.photos/1920/1080',
-    likeCount: 103,
-    commentCount: 21,
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A diam maecenas sed enim ut sem viverra.',
-    publishDate: new Date().toDateString(),
-  };
   const stories = [
     {
       key: 'JohnDoe',
@@ -64,23 +59,28 @@ export default function homeScreen({ navigation }) {
     },
   ];
 
-  return (
-    <FlatList
-      style={{ backgroundColor: colors.background }}
-      data={data}
-      ListHeaderComponent={() => (
-        <StoryContainer stories={stories} storyOnPress={storyOnPress} />
-      )}
-      renderItem={({ item, index }) => (
-        /*<View style={{flex: 1, alignItems: 'center'}}>
-          <Image
-            source={images.harun}
-            style={{height: 512, width: 512, resizeMode: 'contain'}}
-          />
-        </View>
-        */
-        <Post post={post} />
-      )}
-    />
-  );
+  if (Data === undefined) {
+    return (
+      <View style={{
+        backgroundColor: "black", justifyContent: 'center',
+        alignItems: "center", flex: 1
+      }}>
+        <ActivityIndicator size="small" color="white" />
+      </View>
+    )
+  } else {
+    return (
+      <FlatList
+        style={{ backgroundColor: colors.background }}
+        data={Object.values(Data)}
+        ListHeaderComponent={() => (
+          <StoryContainer stories={stories} storyOnPress={storyOnPress} />
+        )}
+        keyExtractor={item => item.postId}
+        renderItem={({ item, index }) => (
+          <Post data={item} />
+        )}
+      />
+    );
+  }
 }

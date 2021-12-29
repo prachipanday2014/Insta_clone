@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
+import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 import homeScreen from '../home/homeScreen';
 import StoryScreen from '../story/StoryScreen';
 import StoryCamera from '../StoryCamera/StoryCamera';
@@ -14,6 +14,7 @@ import palette from 'res/palette';
 import images from 'res/images';
 import colors from '../../../res/colors';
 import DirectMessageScreen from '../DirectMessage/DirectMessageScreen';
+import PostCommentsScreen from '../post/PostCommentScreen';
 
 export default function () {
   const Stack = createStackNavigator();
@@ -23,7 +24,7 @@ export default function () {
       <Stack.Screen
         name="Home"
         component={homeScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           title: '',
           headerStyle: {
             backgroundColor: colors.bottomBackGround,
@@ -54,21 +55,33 @@ export default function () {
           ),
           headerTitle: (
             <TouchableOpacity
-              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               <Image
                 source={images.logo}
-                style={{width: 110, resizeMode: 'contain'}}
+                style={{ width: 110, resizeMode: 'contain' }}
               />
             </TouchableOpacity>
           ),
-          headerTitleStyle: {alignSelf: 'center'},
+          headerTitleStyle: { alignSelf: 'center' },
         })}
       />
       <Stack.Screen name="Story" component={StoryScreen} />
       <Stack.Screen
         name="StoryCamera"
         component={StoryCamera}
-        options={{gestureDirection: 'horizontal-inverted'}} //for left to right transition
+        options={{ gestureDirection: 'horizontal-inverted' }} //for left to right transition
+      />
+      <Stack.Screen
+        name="CommentsScreen"
+        component={PostCommentsScreen}
+        options={({ navigation }) => ({
+          title: '',
+          headerStyle: {
+            backgroundColor: colors.bottomBackGround,
+            shadowColor: colors.seperatorLineColor,
+          }
+        })
+        }
       />
     </Stack.Navigator>
   );

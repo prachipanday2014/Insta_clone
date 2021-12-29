@@ -35,12 +35,23 @@ export default function SignUp({ navigation }) {
         result = await result.json()
         console.log("result", result);
         setLoading(false)
+        if (result.message == 'Please enter valid email address') {
+            alert("Please enter valid email address")
+        }
+        if (result.message == "Email already taken") {
+            alert("Email already exist")
+        }
+        if (result.status == "Error") {
+            alert("Username already exist")
+        }
         if (result.status == "OK") {
             navigation.navigate("MainNavigator")
         }
-        else (
-            alert("Please provide correct details")
-        )
+        if (result.message == "Password should be minimum of 8 characters") {
+            return (
+                alert("Password lenght should be Minimum 8 letters")
+            )
+        }
     }
 
     if (loading) {
@@ -69,6 +80,7 @@ export default function SignUp({ navigation }) {
             </View>
             <View style={Styles.passwordContainer}>
                 <TextInput
+                    secureTextEntry={true}
                     style={Styles.passwordInput}
                     placeholder="Password"
                     placeholderTextColor={colors.textFaded2}

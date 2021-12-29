@@ -6,6 +6,7 @@ import {
 import MainNavigator from './MainNavigator';
 import SignUp from '../auth/SignUpScreen';
 import LogScreen from '../auth/LogScreen';
+import BottomContent from '../main/profile/profileBottomMenu/BottomContent';
 
 StatusBar.setBarStyle('light-content');
 
@@ -43,6 +44,11 @@ export default function AppNavigator({ navigation }) {
         component={MainNavigator}
         options={{ title: '', headerShown: false }}
         NavigateToStoryCamera={NavigateToStoryCamera} />
+      <Stack.Screen
+        name="Bottom"
+        component={BottomContent}
+        options={{ title: '', headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

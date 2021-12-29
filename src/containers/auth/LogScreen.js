@@ -16,9 +16,23 @@ function LogScreen({ navigation }) {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
 
+    const checkTextInput = () => {
+        if (!email.trim()) {
+            alert("Please enter email")
+            return;
+        }
+
+        if (!password.trim()) {
+            alert("Wrong Pasword");
+            return
+        }
+    }
+
+
     async function LogIn() {
         console.log(email, password)
         let item = { email, password }
+        setLoading(true)
         let result = await fetch('http://188.166.189.237:3001/api/v1/users/login', {
             method: 'POST',
             headers: {
@@ -28,15 +42,20 @@ function LogScreen({ navigation }) {
             },
             body: JSON.stringify(item)
         });
-        setLoading(true)
         result = await result.json();
         console.log("result", result)
         setLoading(false)
+        if (result.message == 'Please enter valid email address') {
+            alert("Pleae enter valid Email and Password")
+        }
+        if (result.message == 'Password should be minimum of 8 characters') {
+            alert("Please Enter a Valid Password")
+        }
+        if (result.message == 'Invalid email or password') {
+            alert("Invalid email or password")
+        }
         if (result.status == "OK") {
             navigation.navigate("MainNavigator")
-        }
-        else {
-            alert("Please fill the Login Details")
         }
     }
 
@@ -47,89 +66,90 @@ function LogScreen({ navigation }) {
             </View>
         )
     }
-
-    return (
-        <View style={Styles.container}>
-            <View style={Styles.logoContainer}>
-                <Image source={images.logo} style={{ height: 70, width: 200 }} />
-            </View>
-            <View style={Styles.userNameContainer}>
-                <TextInput
-                    style={Styles.userNameInput}
-                    onChangeText={(text) => setEmail(text)}
-                    placeholder="Phone number, username or email"
-                    placeholderTextColor={colors.textFaded2}
-                />
-            </View>
-            <View style={Styles.passwordContainer}>
-                <TextInput
-                    secureTextEntry={true}
-                    style={Styles.passwordInput}
-                    onChangeText={(text) => setPassword(text)}
-                    placeholder="Password"
-                    placeholderTextColor={colors.textFaded2}
-                />
-            </View>
-            <View style={Styles.forgotPasswordContainer}>
-                <TouchableOpacity>
-                    <Text style={Styles.forgotPasswordText}>Forgot password?</Text>
+    else {
+        return (
+            <View style={Styles.container}>
+                <View style={Styles.logoContainer}>
+                    <Image source={images.logo} style={{ height: 70, width: 200 }} />
+                </View>
+                <View style={Styles.userNameContainer}>
+                    <TextInput
+                        style={Styles.userNameInput}
+                        onChangeText={(text) => setEmail(text)}
+                        placeholder="Phone number, username or email"
+                        placeholderTextColor={colors.textFaded2}
+                    />
+                </View>
+                <View style={Styles.passwordContainer}>
+                    <TextInput
+                        secureTextEntry={true}
+                        style={Styles.passwordInput}
+                        onChangeText={(text) => setPassword(text)}
+                        placeholder="Password"
+                        placeholderTextColor={colors.textFaded2}
+                    />
+                </View>
+                <View style={Styles.forgotPasswordContainer}>
+                    <TouchableOpacity>
+                        <Text style={Styles.forgotPasswordText}>Forgot password?</Text>
+                    </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={Styles.loginContainer} onPress={LogIn}>
+                    <Text style={Styles.loginText}>Log In</Text>
                 </TouchableOpacity>
-            </View>
-            <TouchableOpacity style={Styles.loginContainer} onPress={LogIn}>
-                <Text style={Styles.loginText}>Log In</Text>
-            </TouchableOpacity>
-            <View
-                style={{
-                    //flex: 0.1,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginTop: 30,
-                }}>
-                <View style={{ flex: 1, height: 1, backgroundColor: '#262626' }}></View>
-                <Text style={{ marginLeft: 40, marginRight: 40, color: '#969696' }}>
-                    OR
-                </Text>
                 <View
                     style={{
-                        flex: 1,
-                        height: 1,
-                        backgroundColor: '#262626',
-                    }}></View>
-            </View>
-            <View
-                style={{
-                    marginTop: 40,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                <Image source={images.facebookLogo} style={{ width: 20, height: 20 }} />
-                <TouchableOpacity style={{ alignItems: 'center', marginStart: 10 }}>
-                    <Text style={{ color: '#008bef' }}>Log In With Facebook</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: 'row', marginTop: 50 }}>
+                        //flex: 0.1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginTop: 30,
+                    }}>
+                    <View style={{ flex: 1, height: 1, backgroundColor: '#262626' }}></View>
+                    <Text style={{ marginLeft: 40, marginRight: 40, color: '#969696' }}>
+                        OR
+                    </Text>
+                    <View
+                        style={{
+                            flex: 1,
+                            height: 1,
+                            backgroundColor: '#262626',
+                        }}></View>
+                </View>
                 <View
                     style={{
-                        flex: 1,
-                        backgroundColor: '#262626',
-                        height: 1,
-                    }}></View>
+                        marginTop: 40,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                    <Image source={images.facebookLogo} style={{ width: 20, height: 20 }} />
+                    <TouchableOpacity style={{ alignItems: 'center', marginStart: 10 }}>
+                        <Text style={{ color: '#008bef' }}>Log In With Facebook</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 50 }}>
+                    <View
+                        style={{
+                            flex: 1,
+                            backgroundColor: '#262626',
+                            height: 1,
+                        }}></View>
+                </View>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        marginTop: 20,
+                    }}>
+                    <Text style={{ color: '#969696' }}>Don't have an account ?</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+                        <Text style={{ color: '#008bef' }}> Sign Up.</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    marginTop: 20,
-                }}>
-                <Text style={{ color: '#969696' }}>Don't have an account ?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
-                    <Text style={{ color: '#008bef' }}> Sign Up.</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
+        );
+    }
 }
 
 export default LogScreen;

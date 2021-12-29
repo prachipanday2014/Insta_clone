@@ -1,39 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import React from 'react';
+import { View, Image, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ProfileHeader() {
-  return (
-    <View style={Styles.container}>
-      <TouchableOpacity>
-        <Image
-          source={{uri: 'https://picsum.photos/600'}}
-          style={Styles.prfilePicture}
-        />
-      </TouchableOpacity>
+export default function ProfileHeader({ data }) {
+  console.log("datassssss", data);
+  const navigation = useNavigation();
+  if (data === [""] || undefined) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="small" color="white" />
+      </View>
+    )
+  } else {
+    return (
+      <View style={Styles.container}>
+        <TouchableOpacity>
+          <Image
+            // source={{ uri: data.profilePhoto.secure_url }}
+            style={Styles.prfilePicture}
+          />
+        </TouchableOpacity>
 
-      <View style={Styles.container2}>
-        <View style={Styles.container3}>
-          <TouchableOpacity>
-            <Text style={Styles.numberContainer}>10</Text>
-            <Text style={Styles.text}>Posts</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={Styles.container3}>
-          <TouchableOpacity>
-            <Text style={Styles.numberContainer}>160</Text>
-            <Text style={Styles.text}>Followers</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={Styles.container3}>
-          <TouchableOpacity>
-            <Text style={Styles.numberContainer}>100</Text>
-            <Text style={Styles.text}>Following</Text>
-          </TouchableOpacity>
+        <View style={Styles.container2}>
+          <View style={Styles.container3}>
+            <TouchableOpacity>
+              <Text style={Styles.numberContainer}>{data.posts}</Text>
+              <Text style={Styles.text}>Posts</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={Styles.container3}>
+            <TouchableOpacity>
+              <Text style={Styles.numberContainer}>{data.followers}</Text>
+              <Text style={Styles.text}>Followers</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={Styles.container3}>
+            <TouchableOpacity>
+              <Text style={Styles.numberContainer}>{data.following}</Text>
+              <Text style={Styles.text}>Following</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const Styles = StyleSheet.create({

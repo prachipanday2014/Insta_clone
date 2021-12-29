@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import ActivityListItem from './activityListItem';
+
+// fetch('http://188.166.189.237:3001/api/v1/profile/notifications', {
+//     method: 'GET',
+//     headers: {
+//         "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYmFkNWM4YWRkNDVmMTY3MGE2OTFkNiIsImlhdCI6MTYzOTk4NjMxNywiZXhwIjoxNjQwMDcyNzE3fQ.2Q66_2ZVbH_NqTiioXZEzBI-MWGNaGr_-MqrpsSGSpI",
+//         'X-Powered-By': 'Express',
+//         'Content-Type': 'application/json; charset=utf-8',
+//         'Content-Length': '83',
+//         'ETag': 'W/"53-n1ruIfrDegIuX2oVjZF/93ut9JA"',
+//         'Date': 'Mon, 20 Dec 2021 07:36:53 GMT',
+//         'Connection': 'keep-alive',
+//         'Keep-Alive': 'timeout=5'
+//     }
+// })
+//     .then((repsonse) => repsonse.json())
+//     .then((responseJson) => {
+//         console.log("Notifictaions", responseJson);
+//     })
 
 const data = [
     {
