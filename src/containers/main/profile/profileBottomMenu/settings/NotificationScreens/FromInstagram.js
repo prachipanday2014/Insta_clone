@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-function Help() {
+function FromInstagram() {
     return (
         <View style={styles.container}>
-            <Text>Help</Text>
+            <Text>From Instagram</Text>
         </View>
     )
 }
 
-export default Help;
+export default FromInstagram;
 
 const styles = StyleSheet.create({
     container: {

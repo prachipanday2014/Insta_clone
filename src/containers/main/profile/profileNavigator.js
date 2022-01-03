@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import profileScreen from './profileScreen';
 import { Text, View, Image, ActivityIndicator } from 'react-native';
@@ -15,75 +15,115 @@ import CloseFriends from './profileBottomMenu/closeFriends/CloseFriends';
 import DiscoverPeople from './profileBottomMenu/discoverPeople/DiscoverPeople';
 import Covid from './profileBottomMenu/covid/Covid';
 import { useNavigation } from '@react-navigation/native';
-
+import ProfileFollowingScreen from './ProfileFollowing';
+import ProfileFollowers from './ProfileFollowers';
+import UserPostScreen from './UserPostScreen';
 
 export default function profileNavigator() {
   const Stack = createStackNavigator();
   const navigation = useNavigation()
+  const [Data, setData] = useState([]);
 
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Profile"
-        component={profileScreen}
-        options={{
-          headerTitle: (
-            <TouchableOpacity
-              style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>
-                JohnDoe
-              </Text>
-            </TouchableOpacity>
-          ),
-          headerTitleStyle: { alignSelf: 'center' },
-          headerStyle: {
-            backgroundColor: colors.bottomBackGround,
-            shadowColor: colors.seperatorLineColor,
-          },
-          headerRight: () => (
-            <TouchableOpacity onPress = {() => navigation.navigate("Bottom")}>
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginRight: 10,
-                }}>
-                <Image
-                  source={images.list3}
-                  style={{ resizeMode: 'contain', width: 25, height: 25 }}
-                />
-              </View>
-            </TouchableOpacity>
-          ),
-          headerLeft: () => (
-            <TouchableOpacity>
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginStart: 10,
-                }}>
-                <Image
-                  source={images.addIcon}
-                  style={{ resizeMode: 'contain', width: 20, height: 20 }}
-                />
-              </View>
-            </TouchableOpacity>
-          ),
-        }}
-      />
+  const API = 'http://188.166.189.237:3001/api/v1/users/me';
+  useEffect(() => {
+    async function getData() {
+      const request = fetch(API, {
+        method: "GET",
+        headers: {
+          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MTE4MjY2MSwiZXhwIjoxNjQxMjY5MDYxfQ.vBLkwyMP4osC1tNzz5qgKPdyZKaMteRaubg_s8J_sqY'
+        }
+      });
+      const response = await request;
+      const parsed = await response.json();
+      setData(parsed.data);
+    }
+    getData();
+  }, []);
 
-      <Stack.Screen name='settingScreen' component={SettingScreen} />
-      <Stack.Screen name='archive' component={Archive} />
-      <Stack.Screen name='insight' component={Insight} />
-      <Stack.Screen name='youractivity' component={YourActivity} />
-      <Stack.Screen name='qrcode' component={QrCode} />
-      <Stack.Screen name='saved' component={Saved} />
-      <Stack.Screen name='closefriends' component={CloseFriends} />
-      <Stack.Screen name='discoverpeople' component={DiscoverPeople} />
-      <Stack.Screen name='covid' component={Covid} />
-    </Stack.Navigator>
-  );
+  if (Data === [] || undefined) {
+    return (
+      <View style={{
+        backgroundColor: "black", justifyContent: 'center',
+        alignItems: "center", flex: 1
+      }}>
+        <ActivityIndicator size="small" color="white" />
+      </View>
+    )
+  } else {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Profile"
+          component={profileScreen}
+          options={{
+            headerTitle: (
+              <TouchableOpacity
+                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>
+                  {Data.username}
+                </Text>
+              </TouchableOpacity>
+            ),
+            headerTitleStyle: { alignSelf: 'center' },
+            headerStyle: {
+              backgroundColor: colors.bottomBackGround,
+              shadowColor: colors.seperatorLineColor,
+            },
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate("Bottom")}>
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginRight: 10,
+                  }}>
+                  <Image
+                    source={images.list3}
+                    style={{ resizeMode: 'contain', width: 25, height: 25 }}
+                  />
+                </View>
+              </TouchableOpacity>
+            ),
+            headerLeft: () => (
+              <TouchableOpacity>
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginStart: 10,
+                  }}>
+                  <Image
+                    source={images.addIcon}
+                    style={{ resizeMode: 'contain', width: 20, height: 20 }}
+                  />
+                </View>
+              </TouchableOpacity>
+            ),
+          }}
+        />
+
+
+        <Stack.Screen name='settingScreen' component={SettingScreen}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='archive' component={Archive}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='insight' component={Insight}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='youractivity' component={YourActivity}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='qrcode' component={QrCode}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='saved' component={Saved}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='closefriends' component={CloseFriends}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='discoverpeople' component={DiscoverPeople}
+          options={{ title: '', headerShown: false }} />
+        <Stack.Screen name='covid' component={Covid}
+          options={{ title: '', headerShown: false }} />
+      </Stack.Navigator>
+    );
+  }
 }

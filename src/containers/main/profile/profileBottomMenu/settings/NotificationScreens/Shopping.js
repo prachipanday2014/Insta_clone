@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-function About() {
+function Shopping() {
     return (
         <View style={styles.container}>
-            <Text>About</Text>
+            <Text>Shoppings</Text>
         </View>
     )
 }
 
-export default About;
+export default Shopping;
 
 const styles = StyleSheet.create({
     container: {

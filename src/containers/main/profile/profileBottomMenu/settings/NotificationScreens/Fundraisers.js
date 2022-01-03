@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-function Ads() {
+function Fundraisers() {
     return (
         <View style={styles.container}>
-            <Text>Advertisement</Text>
+            <Text>Fundraisers</Text>
         </View>
     )
 }
 
-export default Ads;
+export default Fundraisers;
 
 const styles = StyleSheet.create({
     container: {

@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-function Creator() {
+function EmailandSms() {
     return (
         <View style={styles.container}>
-            <Text>Creator</Text>
+            <Text>Email and SMS</Text>
         </View>
     )
 }
 
-export default Creator;
+export default EmailandSms;
 
 const styles = StyleSheet.create({
     container: {

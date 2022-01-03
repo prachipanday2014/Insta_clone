@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-function Notification() {
+function DirectmessageCalls() {
     return (
         <View style={styles.container}>
-            <Text>Notification</Text>
+            <Text>Direct messages and calls</Text>
         </View>
     )
 }
 
-export default Notification;
+export default DirectmessageCalls;
 
 const styles = StyleSheet.create({
     container: {

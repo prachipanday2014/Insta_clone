@@ -1,15 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-function Account() {
+function PCS() {
     return (
         <View style={styles.container}>
-            <Text>Account</Text>
+            <Text>Post, stories and comments</Text>
         </View>
     )
 }
 
-export default Account;
+export default PCS;
 
 const styles = StyleSheet.create({
     container: {

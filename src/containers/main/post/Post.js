@@ -22,7 +22,7 @@ export default function Post({data}) {
   // } else {
   return (
     <React.Fragment>
-      <PostHeader post={data} />
+      <PostHeader/>
       <PostImage post={data} />
       <PostActions post={data} />
       <PostLikes post={data} />

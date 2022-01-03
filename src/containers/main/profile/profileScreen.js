@@ -11,7 +11,6 @@ import GridIcon from './gridIcon';
 
 export default function profileScreen() {
   const [Data, setData] = useState([]);
-  console.log("data", Data);
 
   const data = [
     { "key": "1" }
@@ -23,7 +22,7 @@ export default function profileScreen() {
       const request = fetch(API, {
         method: "GET",
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MDc1NTI0MywiZXhwIjoxNjQwODQxNjQzfQ.5A-Px60y1mD-T9qmDZsKTa8wIhLnV_JhUH8PENVVe9A'
+          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MTE4MjY2MSwiZXhwIjoxNjQxMjY5MDYxfQ.vBLkwyMP4osC1tNzz5qgKPdyZKaMteRaubg_s8J_sqY',
         }
       });
       const response = await request;
@@ -33,7 +32,7 @@ export default function profileScreen() {
     getData();
   }, []);
 
-  if (Data === [""] || undefined) {
+  if (Data === [] || undefined) {
     return (
       <View style={{
         backgroundColor: "black", justifyContent: 'center',

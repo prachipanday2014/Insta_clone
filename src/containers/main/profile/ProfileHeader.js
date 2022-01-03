@@ -4,9 +4,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ProfileHeader({ data }) {
-  console.log("datassssss", data);
+
   const navigation = useNavigation();
-  if (data === [""] || undefined) {
+  if (data === [] || undefined) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="small" color="white" />
@@ -17,26 +17,26 @@ export default function ProfileHeader({ data }) {
       <View style={Styles.container}>
         <TouchableOpacity>
           <Image
-            // source={{ uri: data.profilePhoto.secure_url }}
+            source={{ uri: data.profilePhotoUrl }}
             style={Styles.prfilePicture}
           />
         </TouchableOpacity>
 
         <View style={Styles.container2}>
           <View style={Styles.container3}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("UserPostScreen")}>
               <Text style={Styles.numberContainer}>{data.posts}</Text>
               <Text style={Styles.text}>Posts</Text>
             </TouchableOpacity>
           </View>
           <View style={Styles.container3}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("FolllowerScreen")}>
               <Text style={Styles.numberContainer}>{data.followers}</Text>
               <Text style={Styles.text}>Followers</Text>
             </TouchableOpacity>
           </View>
           <View style={Styles.container3}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("ProfileFollowingScreen")}>
               <Text style={Styles.numberContainer}>{data.following}</Text>
               <Text style={Styles.text}>Following</Text>
             </TouchableOpacity>

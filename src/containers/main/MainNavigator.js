@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { View, Text, Image } from 'react-native';
 import images from 'res/images';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,6 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import DirectMessageScreen from './DirectMessage/DirectMessageScreen';
 import StoryScreen from './story/StoryScreen';
 import colors from '../../res/colors';
+import UserPostScreen from '../main/profile/UserPostScreen';
 
 export default function MainNavigator({ navigation }) {
   const Stack = createStackNavigator();
@@ -98,6 +99,8 @@ export default function MainNavigator({ navigation }) {
           headerLeft: () => <View></View>,
         }}
       />
+      <Stack.Screen name='UserPostScreen' component={UserPostScreen}
+        options={{ title: '', headerShown: false }} />
     </Stack.Navigator>
   );
 }

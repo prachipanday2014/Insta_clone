@@ -6,15 +6,14 @@ import StoryContainer from '../story/StoryContainer';
 
 export default function homeScreen({ navigation }) {
   const [Data, setData] = useState([])
-  // console.log("dara", Data);
-
+  
   const API = 'http://188.166.189.237:3001/api/v1/users/feed';
   useEffect(() => {
     async function getData() {
       const request = fetch(API, {
         method: "GET",
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MDc1NTI0MywiZXhwIjoxNjQwODQxNjQzfQ.5A-Px60y1mD-T9qmDZsKTa8wIhLnV_JhUH8PENVVe9A',
+          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MTE4MjY2MSwiZXhwIjoxNjQxMjY5MDYxfQ.vBLkwyMP4osC1tNzz5qgKPdyZKaMteRaubg_s8J_sqY',
         }
       });
       const response = await request;

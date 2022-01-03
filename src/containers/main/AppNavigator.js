@@ -7,19 +7,18 @@ import MainNavigator from './MainNavigator';
 import SignUp from '../auth/SignUpScreen';
 import LogScreen from '../auth/LogScreen';
 import BottomContent from '../main/profile/profileBottomMenu/BottomContent';
+import ProfileFollowers from '../main/profile/ProfileFollowers';
+import ProfileFollowingScreen from '../main/profile/ProfileFollowing';
 
 StatusBar.setBarStyle('light-content');
 
 export default function AppNavigator({ navigation }) {
-  const [validate, setValidate] = React.useState(false);
 
   const NavigateToStoryCamera = () => navigation.navigate('StoryCamera');
   const Stack = createStackNavigator();
-  return validate ? (
-    <MainNavigator />
-  ) : (
+  return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Login"
         component={LogScreen}
         options={{
@@ -38,17 +37,22 @@ export default function AppNavigator({ navigation }) {
           headerTransparent: true,
           title: '',
         }}
-      />
+      /> */}
       <Stack.Screen
         name="MainNavigator"
         component={MainNavigator}
         options={{ title: '', headerShown: false }}
-        NavigateToStoryCamera={NavigateToStoryCamera} />
+        NavigateToStoryCamera={NavigateToStoryCamera}
+      />
       <Stack.Screen
         name="Bottom"
         component={BottomContent}
         options={{ title: '', headerShown: false }}
       />
+      <Stack.Screen name='FolllowerScreen' component={ProfileFollowers}
+        options={{ title: '', headerShown: false }} />
+      <Stack.Screen name='ProfileFollowingScreen' component={ProfileFollowingScreen}
+        options={{ title: '', headerShown: false }} />
     </Stack.Navigator>
   );
 }
