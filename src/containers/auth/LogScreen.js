@@ -10,23 +10,47 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import images from '../../res/images';
 import colors from '../../res/colors'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function LogScreen({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
 
-    const checkTextInput = () => {
-        if (!email.trim()) {
-            alert("Please enter email")
-            return;
-        }
+    // async function LogInPress() {
+    //     setLoading(true)
+    //     await fetch('http://188.166.189.237:3001/api/v1/users/login', {
+    //         method: "POST",
+    //         headers: {
+    //             "Authorization": "Basic Og==",
+    //             "Content-Type": "application/json",
+    //             "Accept": "applicaton/json"
+    //         },
+    //         body: JSON.stringify({
 
-        if (!password.trim()) {
-            alert("Wrong Pasword");
-            return
-        }
-    }
+    //             email: email,
+    //             password: password,
+
+    //         })
+    //     }).then((response) => response.json())
+    //         .then((responseJson) => {
+    //             console.log("res", responseJson);
+    //             setLoading(false)
+    //             AsyncStorage.setItem("TOKEN", responseJson.data.accessToken);
+    //             if (responseJson.message == 'Please enter valid email address') {
+    //                 alert("Pleae enter valid Email and Password")
+    //             }
+    //             if (responseJson.message == 'Password should be minimum of 8 characters') {
+    //                 alert("Please Enter a Valid Password")
+    //             }
+    //             if (responseJson.message == 'Invalid email or password') {
+    //                 alert("Invalid email or password")
+    //             }
+    //             if (responseJson.status == "OK") {
+    //                 navigation.navigate("MainNavigator")
+    //             }
+    //         })
+    // }
 
 
     async function LogIn() {
@@ -55,8 +79,9 @@ function LogScreen({ navigation }) {
             alert("Invalid email or password")
         }
         if (result.status == "OK") {
-            navigation.navigate("MainNavigator")
+            navigation.navigate("root")
         }
+        AsyncStorage.setItem("TOKEN", result.data.accessToken);
     }
 
     if (loading) {

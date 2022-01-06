@@ -2,19 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import images from '../../../res/images';
 import colors from '../../../res/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PostHeader() {
   const [Data, setData] = useState([])
+  const navigation = useNavigation()
   // console.log("HeaderData", Data);
 
   const ID = '61a5d4d05396e71ae2cc6fb8'
   const Api = `http://188.166.189.237:3001/api/v1/post/postDetails/${ID}`;
   useEffect(() => {
     async function getData() {
+
+      const Demo_token = await AsyncStorage.getItem('TOKEN')
+
       const request2 = fetch(Api, {
         method: "GET",
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MTE4MjY2MSwiZXhwIjoxNjQxMjY5MDYxfQ.vBLkwyMP4osC1tNzz5qgKPdyZKaMteRaubg_s8J_sqY',
+          "Authorization": `Bearer ${Demo_token}`,
         }
       });
       const response = await request2;
@@ -33,7 +39,13 @@ export default function PostHeader() {
   } else {
     return (
       <View style={Styles.container}>
-        <View style={Styles.nameContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate("PostedUserScreen",
+          {
+            UserName: Data.username,
+            PlaceName: Data.placeName,
+            ImageUrl: Data.imgUrl
+          })}
+          style={Styles.nameContainer}>
           <Image
             source={{ uri: Data.imgUrl }}
             style={Styles.personImage}
@@ -42,7 +54,7 @@ export default function PostHeader() {
             <Text style={Styles.personName}> {Data.username} </Text>
             <Text style={Styles.placeName}> {Data.placeName} </Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <View>
           <TouchableOpacity>
             <Image source={images.more} style={Styles.iconMore} />

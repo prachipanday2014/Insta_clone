@@ -8,6 +8,7 @@ import LineSeperator from './LineSeperator';
 import ProfileGrid from './ProfileGrid';
 import colors from '../../../res/colors';
 import GridIcon from './gridIcon';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function profileScreen() {
   const [Data, setData] = useState([]);
@@ -19,10 +20,13 @@ export default function profileScreen() {
   const API = 'http://188.166.189.237:3001/api/v1/users/me';
   useEffect(() => {
     async function getData() {
+
+      const Demo_token = await AsyncStorage.getItem('TOKEN')
+      
       const request = fetch(API, {
         method: "GET",
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MTE4MjY2MSwiZXhwIjoxNjQxMjY5MDYxfQ.vBLkwyMP4osC1tNzz5qgKPdyZKaMteRaubg_s8J_sqY',
+          "Authorization": `Bearer ${Demo_token}`,
         }
       });
       const response = await request;

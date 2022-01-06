@@ -104,7 +104,7 @@ export default function SignUp({ navigation }) {
                 />
             </View>
             <View style={Styles.forgotPasswordContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
                     <Text style={Styles.forgotPasswordText}> Already have account? </Text>
                 </TouchableOpacity>
             </View>

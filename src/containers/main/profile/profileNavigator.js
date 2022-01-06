@@ -5,19 +5,17 @@ import { Text, View, Image, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../../res/colors';
 import images from '../../../res/images';
-import SettingScreen from './profileBottomMenu/settings/SettingScreen';
-import Archive from './profileBottomMenu/archive/Archive';
-import Insight from './profileBottomMenu/insight/Insight';
-import YourActivity from './profileBottomMenu/youractivity/YourActivity';
-import QrCode from './profileBottomMenu/qrcode/QrCode';
-import Saved from './profileBottomMenu/saved/Saved';
-import CloseFriends from './profileBottomMenu/closeFriends/CloseFriends';
-import DiscoverPeople from './profileBottomMenu/discoverPeople/DiscoverPeople';
-import Covid from './profileBottomMenu/covid/Covid';
+import SettingScreen from '../profileBottomMenu/settings/SettingScreen';
+import Archive from '../profileBottomMenu/archive/Archive';
+import Insight from '../profileBottomMenu/insight/Insight';
+import YourActivity from '../profileBottomMenu/youractivity/YourActivity';
+import QrCode from '../profileBottomMenu/qrcode/QrCode';
+import Saved from '../profileBottomMenu/saved/Saved';
+import CloseFriends from '../profileBottomMenu/closeFriends/CloseFriends';
+import DiscoverPeople from '../profileBottomMenu/discoverPeople/DiscoverPeople';
+import Covid from '../profileBottomMenu/covid/Covid';
 import { useNavigation } from '@react-navigation/native';
-import ProfileFollowingScreen from './ProfileFollowing';
-import ProfileFollowers from './ProfileFollowers';
-import UserPostScreen from './UserPostScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function profileNavigator() {
   const Stack = createStackNavigator();
@@ -27,10 +25,13 @@ export default function profileNavigator() {
   const API = 'http://188.166.189.237:3001/api/v1/users/me';
   useEffect(() => {
     async function getData() {
+
+      const Demo_token = await AsyncStorage.getItem('TOKEN')
+
       const request = fetch(API, {
         method: "GET",
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MTE4MjY2MSwiZXhwIjoxNjQxMjY5MDYxfQ.vBLkwyMP4osC1tNzz5qgKPdyZKaMteRaubg_s8J_sqY'
+          "Authorization": `Bearer ${Demo_token}`
         }
       });
       const response = await request;

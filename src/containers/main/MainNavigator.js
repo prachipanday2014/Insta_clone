@@ -9,6 +9,8 @@ import DirectMessageScreen from './DirectMessage/DirectMessageScreen';
 import StoryScreen from './story/StoryScreen';
 import colors from '../../res/colors';
 import UserPostScreen from '../main/profile/UserPostScreen';
+import PostUserScreen from './post/PostUserScreen';
+import AddingPostDetails from './addPost/addingPostDetails';
 
 export default function MainNavigator({ navigation }) {
   const Stack = createStackNavigator();
@@ -101,6 +103,22 @@ export default function MainNavigator({ navigation }) {
       />
       <Stack.Screen name='UserPostScreen' component={UserPostScreen}
         options={{ title: '', headerShown: false }} />
+      <Stack.Screen name="PostedUserScreen" component={PostUserScreen}
+        options={{
+          title: "",
+          headerTintColor: "white",
+          headerStyle: {
+            backgroundColor: colors.loginInputBackground,
+          },
+        }} />
+      <Stack.Screen
+        name="Adding Details"
+        component={AddingPostDetails}
+        options={{
+          title: '',
+          headerShown:false
+        }}
+      />
     </Stack.Navigator>
   );
 }

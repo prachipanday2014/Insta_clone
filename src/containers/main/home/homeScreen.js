@@ -3,17 +3,24 @@ import { FlatList, View, ActivityIndicator } from 'react-native';
 import Post from '../post/Post'
 import colors from '../../../res/colors';
 import StoryContainer from '../story/StoryContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function homeScreen({ navigation }) {
   const [Data, setData] = useState([])
-  
+  const [stories, setStories] = useState([])
+  console.log("datass", Data);
+
   const API = 'http://188.166.189.237:3001/api/v1/users/feed';
   useEffect(() => {
     async function getData() {
+
+      const Demo_token = await AsyncStorage.getItem('TOKEN')
+      console.log("demo Toekn", Demo_token);
+
       const request = fetch(API, {
         method: "GET",
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTRjM2Q4YjA2MzMyMDJjODQ4Y2I0MCIsImlhdCI6MTY0MTE4MjY2MSwiZXhwIjoxNjQxMjY5MDYxfQ.vBLkwyMP4osC1tNzz5qgKPdyZKaMteRaubg_s8J_sqY',
+          "Authorization": `Bearer ${Demo_token}`,
         }
       });
       const response = await request;
@@ -23,40 +30,29 @@ export default function homeScreen({ navigation }) {
     getData();
   }, []);
 
+
   const storyOnPress = () => navigation.navigate('StoryScreen');
 
-  const stories = [
-    {
-      key: 'JohnDoe',
-      hasStory: true,
-      src: 'https://picsum.photos/500',
-    },
-    {
-      key: 'CarlaCoe',
-      hasStory: true,
-      src: 'https://picsum.photos/600',
-    },
-    {
-      key: 'DonnaDoe',
-      hasStory: true,
-      src: 'https://picsum.photos/400',
-    },
-    {
-      key: 'JuanDoe',
-      hasStory: true,
-      src: 'https://picsum.photos/300',
-    },
-    {
-      key: 'MartaMoe',
-      hasStory: true,
-      src: 'https://picsum.photos/700',
-    },
-    {
-      key: 'PaulaPoe',
-      hasStory: true,
-      src: 'https://picsum.photos/200',
-    },
-  ];
+  const APIs = 'http://188.166.189.237:3001/api/v1/story/getStory';
+  useEffect(() => {
+    async function getData1() {
+
+      const Demo_token1 = await AsyncStorage.getItem('TOKEN')
+
+      const request = fetch(APIs, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${Demo_token1}`,
+        }
+      });
+      const response1 = await request;
+      const parsed1 = await response1.json();
+      setStories(parsed1.data);
+      console.log("story", stories);
+    }
+    getData1();
+  }, []);
+
 
   if (Data === undefined) {
     return (
