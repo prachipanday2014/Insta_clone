@@ -45,7 +45,7 @@ export default function SignUp({ navigation }) {
             alert("Username already exist")
         }
         if (result.status == "OK") {
-            navigation.navigate("MainNavigator")
+            navigation.navigate("Auth", { screen: 'Login' })
         }
         if (result.message == "Password should be minimum of 8 characters") {
             return (
@@ -104,7 +104,7 @@ export default function SignUp({ navigation }) {
                 />
             </View>
             <View style={Styles.forgotPasswordContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                     <Text style={Styles.forgotPasswordText}> Already have account? </Text>
                 </TouchableOpacity>
             </View>

@@ -5,15 +5,16 @@ import { Text, View, Image, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../../res/colors';
 import images from '../../../res/images';
-import SettingScreen from '../profileBottomMenu/settings/SettingScreen';
-import Archive from '../profileBottomMenu/archive/Archive';
-import Insight from '../profileBottomMenu/insight/Insight';
-import YourActivity from '../profileBottomMenu/youractivity/YourActivity';
-import QrCode from '../profileBottomMenu/qrcode/QrCode';
-import Saved from '../profileBottomMenu/saved/Saved';
-import CloseFriends from '../profileBottomMenu/closeFriends/CloseFriends';
-import DiscoverPeople from '../profileBottomMenu/discoverPeople/DiscoverPeople';
-import Covid from '../profileBottomMenu/covid/Covid';
+// import SettingScreen from './profileBottomMenu/settings/SettingScreen';
+import Archive from './profileBottomMenu/archive/Archive';
+import Insight from './profileBottomMenu/insight/Insight';
+import YourActivity from './profileBottomMenu/youractivity/YourActivity';
+import QrCode from './profileBottomMenu/qrcode/QrCode';
+import Saved from './profileBottomMenu/saved/Saved';
+import CloseFriends from './profileBottomMenu/closeFriends/CloseFriends';
+import DiscoverPeople from './profileBottomMenu/discoverPeople/DiscoverPeople';
+import Covid from './profileBottomMenu/covid/Covid';
+import SettingNavigator from './profileBottomMenu/settings/SettingNavigator';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -57,6 +58,7 @@ export default function profileNavigator() {
           name="Profile"
           component={profileScreen}
           options={{
+            headerShown: false,
             headerTitle: (
               <TouchableOpacity
                 style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -104,17 +106,22 @@ export default function profileNavigator() {
             ),
           }}
         />
-
-
-        <Stack.Screen name='settingScreen' component={SettingScreen}
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            title: null,
+            headerLeft: () => <Image source={images.close} style={{ width: 25, height: 25, tintColor: "white", }} />,
+            headerRight: () =>
+              <Image source={images.share} style={{ width: 25, height: 25, tintColor: "white", right: 10 }} />
+          }}
+          name='qrcode' component={QrCode} />
+        <Stack.Screen name='SettingNavigator' component={SettingNavigator}
           options={{ title: '', headerShown: false }} />
         <Stack.Screen name='archive' component={Archive}
           options={{ title: '', headerShown: false }} />
         <Stack.Screen name='insight' component={Insight}
           options={{ title: '', headerShown: false }} />
         <Stack.Screen name='youractivity' component={YourActivity}
-          options={{ title: '', headerShown: false }} />
-        <Stack.Screen name='qrcode' component={QrCode}
           options={{ title: '', headerShown: false }} />
         <Stack.Screen name='saved' component={Saved}
           options={{ title: '', headerShown: false }} />

@@ -1,16 +1,18 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StatusBar,
 } from 'react-native';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import MainNavigator from './MainNavigator';
 import SignUp from '../auth/SignUpScreen';
 import LogScreen from '../auth/LogScreen';
-import BottomContent from '../main/profileBottomMenu/BottomContent';
+import BottomContent from '../main/profile/profileBottomMenu/BottomContent';
 import ProfileFollowers from '../main/profile/ProfileFollowers';
 import ProfileFollowingScreen from '../main/profile/ProfileFollowing';
 import SplashScreen from './SplashScreen';
-import { useNavigation } from '@react-navigation/native';
+import ForgotPassword from '../auth/ForgotPassword';
+import ResetPassword from '../auth/ResetPassword';
 
 StatusBar.setBarStyle('light-content');
 
@@ -35,6 +37,26 @@ export default function AppNavigator({ navigation }) {
         <Stack.Screen
           name="SignUpScreen"
           component={SignUp}
+          options={{
+            headerStyle: { backgroundColor: '#000' },
+            headerTintColor: '#fff',
+            headerTransparent: true,
+            title: '',
+          }}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPassword}
+          options={{
+            headerStyle: { backgroundColor: '#000' },
+            headerTintColor: '#fff',
+            headerTransparent: true,
+            title: '',
+          }}
+        />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
           options={{
             headerStyle: { backgroundColor: '#000' },
             headerTintColor: '#fff',
@@ -68,6 +90,23 @@ export default function AppNavigator({ navigation }) {
     )
   }
 
+  // const [validate, setValidate] = useState(false);
+  // const [loading, setLoading] = useState(false)
+
+  // const checkToken = async () => {
+  //   var token = await AsyncStorage.getItem('token')
+  //   if (token) {
+  //     setValidate(true)
+  //   } else {
+  //     setValidate(false)
+  //   }
+  // }
+  // useEffect(() => {
+  //   checkToken();
+  // }, [])
+
+
+
   return (
     <Stack.Navigator>
       <Stack.Screen initialRouteName="SplashScreen"
@@ -89,5 +128,5 @@ export default function AppNavigator({ navigation }) {
           headerShown: false
         }} />
     </Stack.Navigator>
-  );
+  )
 }

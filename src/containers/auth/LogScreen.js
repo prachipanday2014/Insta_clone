@@ -17,42 +17,6 @@ function LogScreen({ navigation }) {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
 
-    // async function LogInPress() {
-    //     setLoading(true)
-    //     await fetch('http://188.166.189.237:3001/api/v1/users/login', {
-    //         method: "POST",
-    //         headers: {
-    //             "Authorization": "Basic Og==",
-    //             "Content-Type": "application/json",
-    //             "Accept": "applicaton/json"
-    //         },
-    //         body: JSON.stringify({
-
-    //             email: email,
-    //             password: password,
-
-    //         })
-    //     }).then((response) => response.json())
-    //         .then((responseJson) => {
-    //             console.log("res", responseJson);
-    //             setLoading(false)
-    //             AsyncStorage.setItem("TOKEN", responseJson.data.accessToken);
-    //             if (responseJson.message == 'Please enter valid email address') {
-    //                 alert("Pleae enter valid Email and Password")
-    //             }
-    //             if (responseJson.message == 'Password should be minimum of 8 characters') {
-    //                 alert("Please Enter a Valid Password")
-    //             }
-    //             if (responseJson.message == 'Invalid email or password') {
-    //                 alert("Invalid email or password")
-    //             }
-    //             if (responseJson.status == "OK") {
-    //                 navigation.navigate("MainNavigator")
-    //             }
-    //         })
-    // }
-
-
     async function LogIn() {
         console.log(email, password)
         let item = { email, password }
@@ -115,7 +79,7 @@ function LogScreen({ navigation }) {
                     />
                 </View>
                 <View style={Styles.forgotPasswordContainer}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
                         <Text style={Styles.forgotPasswordText}>Forgot password?</Text>
                     </TouchableOpacity>
                 </View>

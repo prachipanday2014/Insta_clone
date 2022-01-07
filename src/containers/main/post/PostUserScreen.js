@@ -24,10 +24,10 @@ function PostUserScreen({ route, navigation }) {
 
     function FmButtons() {
         return (
-            <View style={{ flexDirection: "row", justifyContent: "space-around", flex: 1, paddingTop: 5, marginBottom: 10 }}>
+            <View style={{ flexDirection: "row", flex: 1, paddingTop: 5, marginBottom: 10, margin:3 }}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
                     <TouchableOpacity style={{
-                        width: "70%", height: "100%", backgroundColor: "#4c68d7",
+                        width: "90%", height: "100%", backgroundColor: "#4c68d7",
                         alignItems: "center", borderRadius: 5
                     }}>
                         <Text style={{ fontSize: 16, color: "white" }}>
@@ -37,7 +37,7 @@ function PostUserScreen({ route, navigation }) {
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
                     <TouchableOpacity style={{
-                        width: "70%", height: "100%", backgroundColor: "#4c68d7",
+                        width: "90%", height: "100%", backgroundColor: "#4c68d7",
                         alignItems: "center", borderRadius: 5
                     }}>
                         <Text style={{ fontSize: 16, color: "white" }}>
@@ -45,34 +45,20 @@ function PostUserScreen({ route, navigation }) {
                         </Text>
                     </TouchableOpacity>
                 </View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
+                    <TouchableOpacity style={{
+                        width: "90%", height: "100%", backgroundColor: "#4c68d7",
+                        alignItems: "center", borderRadius: 5
+                    }}>
+                        <Text style={{ fontSize: 16, color: "white" }}>
+                            Contact
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
 
-    function EditButton() {
-        return (
-            <TouchableOpacity>
-                <View style={{ marginTop: 10 }}>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 30,
-                            borderRadius: 5,
-                            marginStart: 10,
-                            marginEnd: 10,
-                            backgroundColor: '#000',
-                            justifyContent: 'center',
-                            borderColor: '#262626',
-                            borderWidth: 1,
-                        }}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Text style={{ color: 'white' }}>Edit Profile</Text>
-                        </View>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        )
-    }
 
     function UserBio() {
         return (
@@ -147,7 +133,6 @@ function PostUserScreen({ route, navigation }) {
                     <HeaderAndAll />
                     <UserBio />
                     <FmButtons />
-                    <EditButton />
                     <ConstantStories />
                     <LineSeperator />
                     <GridIcon />

@@ -6066,7 +6066,7 @@
     "react-native-ratings" "8.0.4"
     "react-native-size-matters" "^0.3.1"
 
-"react-native-gesture-handler@^1.7.0", "react-native-gesture-handler@>= 1.0.0":
+"react-native-gesture-handler@*", "react-native-gesture-handler@^1.7.0", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-1CrjJf8Z6Iz2XWzfZknYtsm2sud5Lu/pLhhokkgBIKttxqGDtetDEVFDJOTJWJyKCrUPk0X5tnWi/diSF4q++w=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-1.7.0.tgz"
   "version" "1.7.0"
@@ -6098,7 +6098,7 @@
   dependencies:
     "lodash" "^4.17.15"
 
-"react-native-reanimated@^1.10.2", "react-native-reanimated@>= 1.0.0":
+"react-native-reanimated@*", "react-native-reanimated@^1.10.2", "react-native-reanimated@>= 1.0.0":
   "integrity" "sha512-uadP/0QO+4TCsyPSvzRdl+76NPM7Bp8M25KQLB4Hg3tWBMjhrMrETnzNi33L/OPfmhU+7rceyi0QPe/DxKT5bQ=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-1.13.0.tgz"
   "version" "1.13.0"
@@ -6247,6 +6247,11 @@
     "safe-buffer" "~5.1.1"
     "string_decoder" "~1.1.1"
     "util-deprecate" "~1.0.1"
+
+"reanimated-bottom-sheet@^1.0.0-alpha.22":
+  "integrity" "sha512-NxecCn+2iA4YzkFuRK5/b86GHHS2OhZ9VRgiM4q18AC20YE/psRilqxzXCKBEvkOjP5AaAvY0yfE7EkEFBjTvw=="
+  "resolved" "https://registry.npmjs.org/reanimated-bottom-sheet/-/reanimated-bottom-sheet-1.0.0-alpha.22.tgz"
+  "version" "1.0.0-alpha.22"
 
 "redux-thunk@^2.4.1":
   "integrity" "sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q=="
