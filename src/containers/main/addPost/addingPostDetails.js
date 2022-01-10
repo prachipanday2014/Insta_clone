@@ -18,7 +18,7 @@ function AddingPostDetails({ route }) {
 
         const Demo_token = await AsyncStorage.getItem('TOKEN')
         console.log("imgPathhh!", img)
-        form.append("image", {
+        form.append("image", { 
             uri: img,
             type: "image/*",
             name: "image.jpg"
