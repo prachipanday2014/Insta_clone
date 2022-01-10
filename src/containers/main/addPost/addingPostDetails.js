@@ -17,22 +17,29 @@ function AddingPostDetails({ route }) {
         var form = new FormData();
 
         const Demo_token = await AsyncStorage.getItem('TOKEN')
-
-        form.append("image", img);
+        console.log("imgPathhh!", img)
+        form.append("image", {
+            uri: img,
+            type: "image/*",
+            name: "image.jpg"
+        });
+        // form.append("image", img);
         form.append("caption", caption);
         form.append("location", location);
         form.append("tags", tags);
+        console.log("Form Value", form)
 
         fetch("http://188.166.189.237:3001/api/v1/post/", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${Demo_token}`,
+                'Content-Type': 'multipart/form-data',
             },
             body: form
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log("response", responseJson);
+                console.log("responseJson", responseJson);
                 if (responseJson.status === "Ok") {
                     return (
                         Alert.alert(
@@ -49,7 +56,7 @@ function AddingPostDetails({ route }) {
                         ))
                 }
             }).catch((error) => {
-                console.log("err", error);
+                console.log("errPost", error);
             })
     }
 
