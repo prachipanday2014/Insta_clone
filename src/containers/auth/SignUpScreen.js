@@ -17,6 +17,8 @@ export default function SignUp({ navigation }) {
     const [username, setUserName] = useState("");
     const [name, setName] = useState("");
     const [loading, setLoading] = useState("");
+    const [email, setEmail] = useState("");
+
 
     async function signUp() {
         let item = { email, password, username, name }
